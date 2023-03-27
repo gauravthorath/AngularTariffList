@@ -1,0 +1,58 @@
+<mat-table [dataSource]="tariffs">
+  <ng-container matColumnDef="id" class="column-first">
+    <mat-cell *matCellDef="let tariff" class="column-id">{{
+      tariff.id
+    }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <mat-cell *matCellDef="let tariff">{{ tariff.name }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="speed">
+    <td mat-cell *matCellDef="let tariff">
+      <ng-container>
+        Download
+        <div class="speed-box">
+          <div class="speed-icon">
+            <mat-icon>arrow_downward</mat-icon>
+          </div>
+          <div class="speed-number">
+            {{ tariff.downloadSpeed }}
+          </div>
+        </div>
+      </ng-container>
+      <ng-container>
+        Upload
+        <div class="speed-box">
+          <div class="speed-icon">
+            <mat-icon>arrow_upward</mat-icon>
+          </div>
+          <div class="speed-number">
+            {{ tariff.uploadSpeed }}
+          </div>
+        </div>
+      </ng-container>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="benefits">
+    <mat-cell *matCellDef="let tariff">
+      <ng-container>
+        <ul>
+          <li *ngFor="let benefit of tariff.benefits">{{ benefit }}</li>
+        </ul>
+      </ng-container>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="cost">
+    <td mat-cell *matCellDef="let tariff">
+      <div class="">
+        {{ tariff.cost | currency : "EUR" : "symbol" }}
+      </div>
+    </td>
+  </ng-container>
+
+  <mat-row mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+</mat-table>
